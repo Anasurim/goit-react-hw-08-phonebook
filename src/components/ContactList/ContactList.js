@@ -1,26 +1,31 @@
-import React from 'react';
+import { useEffect } from 'react';
 import css from '../ContactList/ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from '../../app/contactsSlice';
+import { fetchContacts, deleteContact } from '../../service/fetchContact';
+import { selectContacts, selectStatusFilter } from '../../app/selectors';
 
 export function ContactList() {
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(selectContacts);
 
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.filter);
+  const filter = useSelector(selectStatusFilter);
 
   const normalizedFilter = filter.toLowerCase().trim();
   const filterContacts = contacts.filter(contact => {
     return contact.name.toLowerCase().includes(normalizedFilter);
   });
 
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
     <ul className={css.contactList}>
-      {filterContacts.map(({ id, name, number }) => {
+      {filterContacts.map(({ id, name, phone }) => {
         return (
           <li key={id} className={css.listItem}>
             <p className={css.listName}>
-              {name}: {number}
+              {name}: {phone}
             </p>
 
             <button

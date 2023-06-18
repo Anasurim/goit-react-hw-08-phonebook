@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from '../ContactForm/ContactFor.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../app/contactsSlice';
+import { addContact } from '../../service/fetchContact';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { nanoid } from '@reduxjs/toolkit';
+import { selectContacts } from '../../app/selectors';
 
 export function ContactForm() {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(selectContacts);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -27,7 +28,7 @@ export function ContactForm() {
     const newContact = {
       id: nanoid(5),
       name: name,
-      number: number,
+      phone: number,
     };
     const isNameExists = contacts.some(
       contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
