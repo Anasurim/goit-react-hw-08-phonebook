@@ -4,12 +4,16 @@ import { Filter } from '../components/Filter/Filter';
 import { useSelector } from 'react-redux';
 import { selectError, selectIsLoading } from '../app/selectors';
 import Spinner from '../components/Spinner/Spinner';
+import { Helmet } from 'react-helmet';
 
 export default function Contacts() {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   return (
     <>
+      <Helmet>
+        <title>Your contacts</title>
+      </Helmet>
       <ContactForm />
       <h2>Contacts</h2>
       <Filter />
