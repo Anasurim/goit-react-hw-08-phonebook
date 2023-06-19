@@ -19,17 +19,22 @@ const handleRejected = (state, { payload }) => {
   state.error = payload;
 };
 
+const handleFulfilled = (state, action) => {
+  state.user = action.payload.user;
+  state.token = action.payload.token;
+  state.isLoggedIn = true;
+};
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: builder => {
     builder
       .addCase(register.pending, handlePending)
-      .addCase(register.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-        state.isLoggedIn = true;
-      })
+      .addCase(register.fulfilled, handleFulfilled)
+      .addCase(logIn.rejected, handleRejected)
+      .addCase(logIn.pending, handlePending)
+      .addCase(logIn.fulfilled, handleFulfilled)
       .addCase(register.rejected, handleRejected);
   },
 });
