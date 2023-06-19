@@ -12,7 +12,7 @@ export default function Contacts() {
   return (
     <>
       <Helmet>
-        <title>Your contacts</title>
+        <title>Contacts</title>
       </Helmet>
       <ContactForm />
       <h2>Contacts</h2>
