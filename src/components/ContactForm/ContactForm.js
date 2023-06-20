@@ -1,34 +1,22 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from '../ContactForm/ContactFor.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../app/operations';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { nanoid } from '@reduxjs/toolkit';
 import { selectContacts } from '../../app/selectors';
 
 export function ContactForm() {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-
-  const handleChangeName = e => {
-    setName(e.target.value);
-  };
-
-  const handleChangeNumber = e => {
-    setNumber(e.target.value);
-  };
-
   const handleSubmit = e => {
     e.preventDefault();
 
+    const form = e.currentTarget;
     const newContact = {
-      id: nanoid(5),
-      name: name,
-      phone: number,
+      name: e.target.elements.name.value,
+      number: e.target.elements.number.value,
     };
     const isNameExists = contacts.some(
       contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
@@ -39,13 +27,7 @@ export function ContactForm() {
     } else {
       dispatch(addContact(newContact));
     }
-
-    resetForm();
-  };
-
-  const resetForm = () => {
-    setName('');
-    setNumber('');
+    form.reset();
   };
 
   return (
@@ -55,8 +37,6 @@ export function ContactForm() {
         <input
           type="text"
           name="name"
-          value={name}
-          onChange={handleChangeName}
           className={css.formInput}
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
@@ -68,8 +48,6 @@ export function ContactForm() {
         <input
           type="tel"
           name="number"
-          value={number}
-          onChange={handleChangeNumber}
           className={css.formInput}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"

@@ -5,10 +5,9 @@ import { fetchContacts, deleteContact } from '../../app/operations';
 import { selectContacts, selectStatusFilter } from '../../app/selectors';
 
 export function ContactList() {
-  const contacts = useSelector(selectContacts);
-
   const dispatch = useDispatch();
   const filter = useSelector(selectStatusFilter);
+  const contacts = useSelector(selectContacts);
 
   const normalizedFilter = filter.toLowerCase().trim();
   const filterContacts = contacts.filter(contact => {
@@ -21,11 +20,11 @@ export function ContactList() {
 
   return (
     <ul className={css.contactList}>
-      {filterContacts.map(({ id, name, phone }) => {
+      {filterContacts.map(({ id, name, number }) => {
         return (
           <li key={id} className={css.listItem}>
             <p className={css.listName}>
-              {name}: {phone}
+              {name}: {number}
             </p>
 
             <button
