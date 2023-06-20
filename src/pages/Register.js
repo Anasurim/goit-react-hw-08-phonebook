@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { register } from 'app/Auth/operations';
+import css from './Register.module.css';
 
 export default function SignUp() {
   const dispatch = useDispatch();
@@ -21,20 +22,22 @@ export default function SignUp() {
 
   return (
     <>
-      <form onSubmit={handleSubmit} autoComplete="off">
-        <label>
+      <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
+        <label className={css.formLabel}>
           Username
-          <input type="text" name="name" />
+          <input className={css.formInput} type="text" name="name" />
         </label>
-        <label>
+        <label className={css.formLabel}>
           Email
-          <input type="email" name="email" />
+          <input className={css.formInput} type="email" name="email" />
         </label>
-        <label>
+        <label className={css.formLabel}>
           Password
-          <input type="password" name="password" />
+          <input className={css.formInput} type="password" name="password" />
         </label>
-        <button type="submit">Register</button>
+        <button className={css.formButton} type="submit">
+          Register
+        </button>
       </form>
     </>
   );

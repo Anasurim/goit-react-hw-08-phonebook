@@ -25,11 +25,19 @@ export const register = createAsyncThunk(
       const res = await axios.post('/users/signup', credentials);
       // After successful registration, add the token to the HTTP header
       setAuthHeader(res.data.token);
-      thunkAPI.dispatch(Notify.success('Registration successful'));
+      thunkAPI.dispatch(
+        Notify.success('Registration successful', {
+          timeout: 700,
+        })
+      );
       return res.data;
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        thunkAPI.dispatch(Notify.failure('Bad Request: Invalid credentials'));
+        thunkAPI.dispatch(
+          Notify.failure('Bad Request: Invalid credentials', {
+            timeout: 700,
+          })
+        );
       }
       return thunkAPI.rejectWithValue(error.message);
     }
