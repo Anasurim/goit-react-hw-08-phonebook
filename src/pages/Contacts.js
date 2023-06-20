@@ -5,10 +5,19 @@ import { useSelector } from 'react-redux';
 import { selectError, selectIsLoading } from '../app/selectors';
 import Spinner from '../components/Spinner/Spinner';
 import { Helmet } from 'react-helmet';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchContacts } from 'app/operations';
 
 export default function Contacts() {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
     <>
       <Helmet>

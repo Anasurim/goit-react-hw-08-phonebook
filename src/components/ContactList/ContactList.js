@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import css from '../ContactList/ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts, deleteContact } from '../../app/operations';
+import { deleteContact } from '../../app/operations';
 import { selectContacts, selectStatusFilter } from '../../app/selectors';
 
 export function ContactList() {
@@ -14,9 +14,9 @@ export function ContactList() {
     return contact.name.toLowerCase().includes(normalizedFilter);
   });
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchContacts());
+  // }, [dispatch]);
 
   return (
     <ul className={css.contactList}>

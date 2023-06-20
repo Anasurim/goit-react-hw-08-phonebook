@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet';
 import { useDispatch } from 'react-redux';
 import { register } from 'app/Auth/operations';
 
@@ -22,10 +21,6 @@ export default function SignUp() {
 
   return (
     <>
-      <Helmet>
-        <title>Login</title>
-      </Helmet>
-
       <form onSubmit={handleSubmit} autoComplete="off">
         <label>
           Username
@@ -43,23 +38,4 @@ export default function SignUp() {
       </form>
     </>
   );
-}
-
-{
-  /* <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
-      <label className={css.label}>
-        Username
-        <input type="text" name="name" />
-      </label>
-      <label className={css.label}>
-        Email
-        <input type="email" name="email" />
-      </label>
-      <label className={css.label}>
-        Password
-        <input type="password" name="password" />
-      </label>
-      <button type="submit">Register</button>
-    </form>
-  ); */
 }
