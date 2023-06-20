@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from '../ContactForm/ContactFor.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../service/fetchContact';
+import { addContact } from '../../app/operations';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { nanoid } from '@reduxjs/toolkit';
 import { selectContacts } from '../../app/selectors';
