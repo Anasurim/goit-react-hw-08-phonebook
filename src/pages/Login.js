@@ -1,4 +1,3 @@
-// import { Helmet } from 'react-helmet';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'app/Auth/operations';
 
@@ -20,9 +19,6 @@ export default function Login() {
   };
   return (
     <>
-      {/* <Helmet>
-        <title>Login</title>
-      </Helmet> */}
       <form onSubmit={handleSubmit} autoComplete="off">
         <label>
           Email

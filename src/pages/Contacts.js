@@ -4,7 +4,6 @@ import { Filter } from '../components/Filter/Filter';
 import { useSelector } from 'react-redux';
 import { selectError, selectIsLoading } from '../app/selectors';
 import Spinner from '../components/Spinner/Spinner';
-import { Helmet } from 'react-helmet';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchContacts } from 'app/operations';
@@ -20,9 +19,6 @@ export default function Contacts() {
 
   return (
     <>
-      <Helmet>
-        <title>Contacts</title>
-      </Helmet>
       <ContactForm />
       <h2>Contacts</h2>
       <Filter />
